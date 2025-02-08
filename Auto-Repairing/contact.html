@@ -34,6 +34,25 @@ crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+       var isNS = (navigator.appName == "PN") ? 1 : 0;
+       if(navigator.appName == "PN") document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
+       function mischandler(){
+       return false;
+       }
+       function mousehandler(e){
+       var myevent = (isNS) ? e : event;
+       var eventbutton = (isNS) ? myevent.which : myevent.button;
+       if((eventbutton==2)||(eventbutton==3)) return false;
+       }
+       document.oncontextmenu = mischandler;
+       document.onmousedown = mousehandler;
+       document.onmouseup = mousehandler;
+       </script>
+
 </head>
 <body>
     <!-- HEADER-SECTION -->
@@ -138,7 +157,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer">
                     <div class="about-section-form">
                         <h6 class="autorix-text teams-text aos-init aos-animate get-in" data-aos="flip-up">get in touch</h6>
                         <h2 class="contact-us-title">Send us a message</h2>
-                    <form id="" method="" action="">
+                    <form id="submit-form" method="" action="">
                       <div class="row">
                           <div class="col-lg-6 col-md-6 col-sm-12">  
                             <div class="form-group contact-form-margin">
@@ -178,7 +197,26 @@ crossorigin="anonymous" referrerpolicy="no-referrer">
         </div>    
     </section>
 
-    
+    <script>
+        $("#submit-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+        url:"https://script.google.com/macros/s/AKfycbznZ9f5EJqx9rYenXJGGZSYEtOaqsKDKdv2mxVSFGXgvLWkaZhwM15_aP158YpunSPf/exec",
+        data:$("#submit-form").serialize(),
+        method:"post",
+        success:function (response){
+        alert("Our Sales Team will contact you shortly. Thank you!")
+        window.location.reload()
+        //window.location.href="https://google.com"
+        },
+        error:function (err){
+        alert("Something Error")
+        
+        }
+        })
+        })
+        </script>
+
     <!-- Footer-Section -->
     <div class="footer-section">
         <div class="container">
